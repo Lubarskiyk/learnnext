@@ -5,11 +5,13 @@ import ReactCountryFlag from "react-country-flag";
 import Button from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 import { useState } from "react";
-import Modal from "@/components/Modal";
+import Modal from "@/components/modal/Modal";
 import LogInForm from "@/components/LogIn";
+import SignUpForm from "@/components/SingUp";
 
 export default function Header() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isLogInOpen, setLogInOpen] = useState(false);
+  const [isSingUpOpen, setSingUpOpen] = useState(false);
   return (
     <header className="px- mx-auto flex w-full max-w-[1440px] items-center justify-between px-32 py-5 text-base">
       <Link className="flex items-center gap-2" href="#">
@@ -41,7 +43,7 @@ export default function Header() {
           <Button
             variant="iconText"
             className="group"
-            onClick={() => setModalOpen(true)}
+            onClick={() => setLogInOpen(true)}
           >
             <LogIn
               className="stroke-[var(--primary)] group-hover:stroke-[var(--secondary)]"
@@ -54,15 +56,20 @@ export default function Header() {
           <Button
             variant="black"
             className="font-bold text-white"
-            onClick={() => setModalOpen(true)}
+            onClick={() => setSingUpOpen(true)}
           >
             Registration
           </Button>
         </li>
       </ul>
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+      {isLogInOpen && (
+        <Modal isOpen={isLogInOpen} onClose={() => setLogInOpen(false)}>
           <LogInForm />
+        </Modal>
+      )}
+      {isSingUpOpen && (
+        <Modal isOpen={isSingUpOpen} onClose={() => setSingUpOpen(false)}>
+          <SignUpForm />
         </Modal>
       )}
     </header>

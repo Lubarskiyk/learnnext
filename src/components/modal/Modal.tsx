@@ -1,6 +1,5 @@
 "use client";
 import { ReactNode, useEffect, useRef, MouseEvent } from "react";
-
 interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
@@ -38,10 +37,10 @@ export default function Modal({ children, isOpen, onClose }: ModalProps) {
   return (
     <dialog
       ref={dialogRef}
-      className="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/50"
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl shadow-xl backdrop:bg-[var(--primary)] backdrop:opacity-50"
       onClick={handleBackdropClick}
     >
-      <div className="relative rounded-lg bg-white p-6 shadow-lg">
+      <div className="relative m-auto w-142 bg-white p-16">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500"

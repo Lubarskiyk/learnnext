@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import Header from "@/components/Header";
+import Providers from "@/providers";
 
 const robotoSans = Roboto({
   style: ["normal", "italic"],
@@ -25,8 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="rose">
       <body className={`${robotoSans.variable} antialiased`}>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -3,6 +3,9 @@ import { object, ObjectSchema, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "@/components/ui/input";
 import Button from "@/components/ui/button";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { signUp } from "@/redux/auth/operation";
 
 interface ISingUpForm {
   name: string;
@@ -18,8 +21,10 @@ const SignUpSchema: ObjectSchema<ISingUpForm> = object().shape({
   email: string().email("Invalid email").required("Email is required"),
   password: string().required("Password is required"),
 });
+const useAppDispatch: () => AppDispatch = useDispatch;
 
 export default function SignUpForm() {
+  const dispatch = useAppDispatch();
   const {
     control,
     handleSubmit,
@@ -31,10 +36,16 @@ export default function SignUpForm() {
     mode: "onBlur",
   });
 
-  const onSubmit: SubmitHandler<ISingUpForm> = data => {
-    alert(`Name: ${data.name}
-    Email: ${data.email}
-    Password: ${data.password}`);
+  const onSubmit: SubmitHandler<ISingUpForm> = ({
+    name,
+    email,
+    password,
+  }: ISingUpForm) => {
+    alert(`Name: ${name}
+    Email: ${email}
+    Password: ${password}`);
+    dispatch(signUp({ email, password }));
+
     reset();
   };
 
@@ -52,7 +63,7 @@ export default function SignUpForm() {
         className="flex w-full flex-col items-center justify-center"
         noValidate
       >
-        <div className="relative w-full">
+        <div className="relative mb-4.5 w-full">
           <Controller
             control={control}
             name="name"
@@ -71,7 +82,7 @@ export default function SignUpForm() {
             </p>
           )}
         </div>
-        <div className="relative w-full">
+        <div className="relative mb-4.5 w-full">
           <Controller
             control={control}
             name="email"
@@ -90,7 +101,7 @@ export default function SignUpForm() {
             </p>
           )}
         </div>
-        <div className="relative w-full">
+        <div className="relative mb-10 w-full">
           <Controller
             control={control}
             name="password"

@@ -47,7 +47,7 @@ export default function LogInForm() {
         className="flex w-full flex-col items-center justify-center"
         noValidate
       >
-        <div className="relative w-full">
+        <div className="relative mb-4.5 w-full">
           <Controller
             control={control}
             name="email"
@@ -66,7 +66,7 @@ export default function LogInForm() {
             </p>
           )}
         </div>
-        <div className="relative w-full">
+        <div className="relative mb-10 w-full">
           <Controller
             control={control}
             name={"password"}

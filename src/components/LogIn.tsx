@@ -3,6 +3,9 @@ import { object, ObjectSchema, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "@/components/ui/input";
 import Button from "@/components/ui/button";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { signIn } from "@/redux/auth/operation";
 
 interface ILogInForm {
   email: string;
@@ -13,8 +16,10 @@ const SignInSchema: ObjectSchema<ILogInForm> = object().shape({
   email: string().email("Invalid email").required("Email is required"),
   password: string().required("Password is required"),
 });
+const useAppDispatch: () => AppDispatch = useDispatch;
 
 export default function LogInForm() {
+  const dispatch = useAppDispatch();
   const {
     control,
     handleSubmit,
@@ -26,10 +31,11 @@ export default function LogInForm() {
     mode: "onBlur",
   });
 
-  const onSubmit: SubmitHandler<ILogInForm> = data => {
-    alert(`Email ${data.email}
-    Password: ${data.password}`);
-
+  const onSubmit: SubmitHandler<ILogInForm> = ({
+    email,
+    password,
+  }: ILogInForm) => {
+    dispatch(signIn({ email, password }));
     reset();
   };
 

@@ -1,5 +1,5 @@
-"use client";
 import { ReactNode, useEffect, useRef, MouseEvent } from "react";
+
 interface ModalProps {
   children: ReactNode;
   isOpen: boolean;

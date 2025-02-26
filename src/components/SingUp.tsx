@@ -7,7 +7,7 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { signUp } from "@/redux/auth/operation";
 
-interface ISingUpForm {
+export interface ISingUpForm {
   name: string;
   email: string;
   password: string;
@@ -25,6 +25,7 @@ const useAppDispatch: () => AppDispatch = useDispatch;
 
 export default function SignUpForm() {
   const dispatch = useAppDispatch();
+
   const {
     control,
     handleSubmit,
@@ -41,11 +42,7 @@ export default function SignUpForm() {
     email,
     password,
   }: ISingUpForm) => {
-    alert(`Name: ${name}
-    Email: ${email}
-    Password: ${password}`);
-    dispatch(signUp({ email, password }));
-
+    dispatch(signUp({ email, password, displayName: name }));
     reset();
   };
 

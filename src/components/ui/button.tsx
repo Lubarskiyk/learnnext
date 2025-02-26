@@ -8,11 +8,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: " bg-[var(--primary)]  hover:bg-[var(--secondary)] ",
+        default: "bg-[var(--primary)]  hover:bg-[var(--secondary)] ",
         black:
           "transition-colors duration-[250ms] ease-in-out bg-black  hover:bg-gray-700 ",
         iconText:
-          " px-1 py-3 flex items-center justify-center gap-2 bg-transparent group",
+          "px-1 py-3 flex items-center justify-center gap-2 bg-transparent group",
       },
     },
     defaultVariants: {

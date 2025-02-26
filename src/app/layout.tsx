@@ -24,7 +24,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="rose">
+    <html lang="en" data-theme="sky">
       <body className={`${robotoSans.variable} antialiased`}>
         <Providers>
           <Header />

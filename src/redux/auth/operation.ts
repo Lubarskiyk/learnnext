@@ -4,33 +4,53 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  User,
+  updateProfile,
 } from "firebase/auth";
+import { UserData } from "@/types/user";
+import Cookies from "js-cookie";
 
 interface AuthCredentials {
   email: string;
   password: string;
+  displayName?: string;
 }
 
 export const signUp = createAsyncThunk<
-  User,
+  UserData,
   AuthCredentials,
   { rejectValue: string }
->("auth/signUp", async ({ email, password }, { rejectWithValue }) => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    return userCredential.user;
-  } catch (error: any) {
-    return rejectWithValue(error.message);
+>(
+  "auth/signUp",
+  async (
+    { email, password, displayName }: AuthCredentials,
+    { rejectWithValue }
+  ) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await updateProfile(user, { displayName });
+
+      const token = await user.getIdToken();
+      Cookies.set("token", token, { expires: 7 });
+
+      return {
+        uid: user.uid,
+        token: token,
+        email: user.email,
+        displayName: user.displayName,
+      };
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const signIn = createAsyncThunk<
-  User,
+  UserData,
   AuthCredentials,
   { rejectValue: string }
 >(
@@ -45,7 +65,15 @@ export const signIn = createAsyncThunk<
         email,
         password
       );
-      return userCredential.user;
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+      Cookies.set("token", token, { expires: 7 });
+      return {
+        uid: user.uid,
+        token: token,
+        email: user.email,
+        displayName: user.displayName,
+      };
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -54,6 +82,7 @@ export const signIn = createAsyncThunk<
 
 export const signOutUser = createAsyncThunk<void, void>(
   "auth/signOut",
+
   async () => {
     await signOut(auth);
   }

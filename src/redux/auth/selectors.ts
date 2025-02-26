@@ -1,7 +1,8 @@
 import { RootState } from "@/redux/store";
-import { User } from "firebase/auth";
+import { UserData } from "@/types/user";
 
-export const selectUser = (state: RootState): User | null => state.auth.user;
+export const selectUser = (state: RootState): UserData | null =>
+  state.auth.user;
 
 export const selectUserIsLoading = (state: RootState): boolean =>
   state.auth.loading;

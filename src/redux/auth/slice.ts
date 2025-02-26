@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { signUp, signIn, signOutUser } from "./operation";
-import { User } from "firebase/auth";
+import { UserData } from "@/types/user";
 
-interface AuthState {
-  user: User | null;
+export interface AuthState {
+  user: UserData | null;
   loading: boolean;
   error: string | null;
 }
@@ -15,16 +15,28 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
   initialState,
-  reducers: {},
+  name: "auth",
+  reducers: {
+    setUser(state, action: PayloadAction<UserData>) {
+      state.user = action.payload;
+    },
+    setToken(state, action: PayloadAction<string | null>) {
+      if (state.user) {
+        state.user.token = action.payload;
+      }
+    },
+    logout(state) {
+      state.user = null;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(signUp.pending, state => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(signUp.fulfilled, (state, action: PayloadAction<User>) => {
+      .addCase(signUp.fulfilled, (state, action: PayloadAction<UserData>) => {
         state.loading = false;
         state.user = action.payload;
       })
@@ -39,7 +51,7 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(signIn.fulfilled, (state, action: PayloadAction<User>) => {
+      .addCase(signIn.fulfilled, (state, action: PayloadAction<UserData>) => {
         state.loading = false;
         state.user = action.payload;
       })
@@ -56,4 +68,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setUser, setToken, logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -39,7 +39,7 @@ export default function Home() {
             highly qualified and experienced tutors.
           </p>
           <Link
-            href="#"
+            href="/teachers"
             className="rounded-xl bg-[var(--primary)] px-22 py-4 text-lg font-bold transition-colors duration-[250ms] ease-in-out hover:bg-[var(--secondary)]"
           >
             Get started

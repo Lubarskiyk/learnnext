@@ -4,6 +4,8 @@ import "./globals.css";
 import { ReactNode } from "react";
 import Header from "@/components/Header";
 import Providers from "@/providers";
+import BodyBackground from "@/utils/BodyBackground";
+import { cn } from "@/utils/utils";
 
 const robotoSans = Roboto({
   style: ["normal", "italic"],
@@ -25,7 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="sky">
-      <body className={`${robotoSans.variable} antialiased`}>
+      <body
+        className={cn(
+          "bg-[var(--body-bg)] transition-colors duration-300",
+          `${robotoSans.variable} antialiased`
+        )}
+      >
+        <BodyBackground />
         <Providers>
           <Header />
           {children}

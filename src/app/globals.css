@@ -2,6 +2,10 @@
 :root {
   --background: #ffffff;
   --foreground: #121417;
+  --background-secondary: #F8F8F8;
+  --color-label:#8A8A89;
+
+  --body-bg: var(--background);
 }
 
 [data-theme="sunrise"] {
@@ -30,14 +34,8 @@
 }
 
 body {
+  @apply bg-[var(--body-bg)];
   color: var(--foreground);
-  background: var(--background);
   font-family: Roboto, sans-serif;
 }
 
-/*@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}*/

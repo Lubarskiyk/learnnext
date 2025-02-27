@@ -25,7 +25,7 @@ export default function Header() {
   const isLogInOpen = useSelector(selectIsLogInOpen);
   const isSingUpOpen = useSelector(selectIsSignUpOpen);
   return (
-    <header className="px- mx-auto flex w-full max-w-[1440px] items-center justify-between px-32 py-5 text-base">
+    <header className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-32 py-5 text-base">
       <Link className="flex items-center gap-2" href="#">
         <div className="h-7 w-7 overflow-hidden rounded-full">
           <ReactCountryFlag
@@ -43,10 +43,10 @@ export default function Header() {
       </Link>
 
       <nav className="flex items-center gap-7">
-        <Link className="py-1 text-base leading-[1.25]" href="#">
+        <Link className="py-1 text-base leading-[1.25]" href="/">
           Home
         </Link>
-        <Link className="py-1 text-base leading-[1.25]" href="#">
+        <Link className="py-1 text-base leading-[1.25]" href="/teachers">
           Teachers
         </Link>
       </nav>

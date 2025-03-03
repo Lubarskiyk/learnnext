@@ -4,6 +4,7 @@
   --foreground: #121417;
   --background-secondary: #F8F8F8;
   --color-label:#8A8A89;
+  --border-avatar:#FBE9BA;
 
   --body-bg: var(--background);
 }
@@ -38,4 +39,6 @@ body {
   color: var(--foreground);
   font-family: Roboto, sans-serif;
 }
+
+
 

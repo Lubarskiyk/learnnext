@@ -1,4 +1,5 @@
 export type TypeTeacher = {
+  id: string;
   name: string;
   surname: string;
   languages: string[];
@@ -25,4 +26,11 @@ export type PickedTeacherInfo = Pick<
 export type PickedTeacherOverview = Pick<
   TypeTeacher,
   "languages" | "lesson_info" | "conditions"
+>;
+
+export type PickedDetails = Pick<TypeTeacher, "experience" | "reviews">;
+
+export type PickedReviews = Pick<
+  TypeTeacher["reviews"][number],
+  "reviewer_name" | "reviewer_rating" | "comment"
 >;

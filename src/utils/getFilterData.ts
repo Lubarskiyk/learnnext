@@ -6,6 +6,8 @@ export const getData = async () => {
   const q = query(collection(db, "teachers"));
   const querySnapshot = await getDocs(q);
 
+  const rawData = querySnapshot.docs.map(doc => doc.data());
+
   const allLanguages = querySnapshot.docs.flatMap(
     doc => doc.data().languages || []
   );

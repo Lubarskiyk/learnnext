@@ -16,7 +16,7 @@ export default function AvatarTeacher({
           width={96}
           height={96}
           alt="Picture of the author"
-          className="h-24 w-24 rounded-full"
+          className="h-auto w-24 rounded-full"
         />
         <span className="absolute top-5 right-5 block h-3 w-3 rounded-full border-2 border-white bg-green-400"></span>
       </div>

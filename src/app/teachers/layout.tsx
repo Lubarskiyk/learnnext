@@ -8,10 +8,10 @@ export default async function TeachersLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const filters: IAllFilters = await getData();
+  const uniqueFilters: IAllFilters = await getData();
   return (
     <section>
-      <Filters filters={filters} />
+      <Filters filters={uniqueFilters} />
       {children}
     </section>
   );

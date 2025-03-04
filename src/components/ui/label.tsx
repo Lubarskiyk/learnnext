@@ -9,20 +9,18 @@ interface ILabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   children?: ReactNode;
 }
 export default function Label({
-  forId = "",
-  id = "",
   text,
   className,
   children,
+  ...props
 }: ILabelProps): ReactElement {
   return (
     <label
-      htmlFor={forId}
-      id={id}
       className={cn(
         "text-sm leading-[18px] font-medium text-[var(--color-label)]",
         className
       )}
+      {...props}
     >
       {text} {children}
     </label>

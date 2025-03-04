@@ -43,8 +43,11 @@ export const signUp = createAsyncThunk<
         email: user.email,
         displayName: user.displayName,
       };
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue("An unknown error occurred");
     }
   }
 );
@@ -74,8 +77,11 @@ export const signIn = createAsyncThunk<
         email: user.email,
         displayName: user.displayName,
       };
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue("An unknown error occurred");
     }
   }
 );

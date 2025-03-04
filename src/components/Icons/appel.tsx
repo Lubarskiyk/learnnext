@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 interface AppleLogoProps {
   className?: string;
   color1?: string;
